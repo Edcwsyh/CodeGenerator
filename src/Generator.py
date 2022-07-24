@@ -68,8 +68,6 @@ class Generator :
                 line = line.replace( fullTag, paramList[-1] )
             # 递归, 对第2个tag进行替换
             return self.generate_line( line, paramIndex )
-        line = line.replace( '$[NewLine]', '\n' )
-        line = line.replace( '$[Tab]', '    ' )
         return line
 
     ##
@@ -111,13 +109,13 @@ class Generator :
             exit()
         for index in range( 0, len( self.config[Env.key_template] ) ) : 
             self.read_template( index )
-            self.generate_simple( index )
+            self.generate_single_file( index )
 
     ##
     # @description generate_simple 生成单个文件
     #
     # @return 
-    def generate_simple( self, index ) :
+    def generate_single_file( self, index ) :
         self.file = open( self.config[Env.key_output][index], 'w' )
         if Env.generate_head : 
             self.generate_file_head()
