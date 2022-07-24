@@ -11,10 +11,13 @@ def load_config(fileName) :
         data = json.load( file )
         # 对目标文件路径以及目标文件路径进行替换
         # 支持绝对路径和相对路径
+        configPath = os.path.dirname( fileName )
+        if len( configPath ) == 0 : 
+            configPath = '.'
         for index in range( 0, len( data[Env.key_template] ) ) : 
             if data[Env.key_template][index][0] != '/' : 
-                data[Env.key_template][index] = os.path.dirname( fileName ) + '/' + data[Env.key_template][index]
+                data[Env.key_template][index] = configPath + '/' + data[Env.key_template][index]
         for index in range( 0, len( data[Env.key_output] ) ) : 
             if data[Env.key_output][index][0] != '/' : 
-                data[Env.key_output][index] = os.path.dirname( fileName ) + '/' + data[Env.key_output][index]
+                data[Env.key_output][index] = configPath + '/' + data[Env.key_output][index]
         return data
