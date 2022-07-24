@@ -1,0 +1,17 @@
+当前问题:
+1.无法生成多个多行代码, 例如:
+    case ${num} : 
+        ${func}();break;
+    期望生成的格式为:
+    case 1 : 
+        func1();break;
+    case 2 : 
+        func2();break;
+    实际生成:
+    case 1 : 
+    case 2 : 
+        func1();break;
+        func2();break;
+2.暂不支持将多个生成配置写入单个json文件当中
+
+    

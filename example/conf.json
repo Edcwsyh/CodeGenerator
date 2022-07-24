@@ -1,0 +1,35 @@
+{
+    "output_file" : [
+        "./test.h", 
+        "./test.cpp"
+    ], 
+    "template_file" : [
+        "./test_h.tmpl", 
+        "./test_cpp.tmpl"
+    ], 
+    "annotation" : "//", 
+    "param_list" : 
+    {
+        "Include" : [
+            "test.h"
+        ], 
+        "Request" : [
+            "loginReq", "logoutReq"
+        ], 
+        "RequestID" : [
+            "1", "2"
+        ], 
+        "RequestFunc" : [
+            "HandleLoginReq", "HandleLogoutReq"
+        ], 
+        "Result" : [
+            "loginRes", "logoutRes"
+        ], 
+        "ResultID" : [
+            "3", "4"
+        ], 
+        "ResultFunc" : [
+            "HandleLoginRes", "HandleLogoutRes"
+        ]
+    }
+}

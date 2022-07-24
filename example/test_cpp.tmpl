@@ -1,0 +1,15 @@
+#include "${Include}"
+
+int test( int req, int res ) {
+    switch( req ) {
+        case ${Request} : ${RequestFunc}(); break;
+    }
+    switch( res ) {
+        $[Block]
+        case ${Result} : 
+            ${ResultFunc}(); 
+            break;
+        $[Block]
+    }
+    return 0;
+}
