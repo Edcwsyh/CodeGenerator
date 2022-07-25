@@ -7,6 +7,8 @@ import Env
 import re
 import os
 import datetime
+from Tools import print_color
+from colorama import Fore
 
 class Generator : 
     def __init__( self ) : 
@@ -39,7 +41,7 @@ class Generator :
     # @return 
     def read_template( self, index ) : 
         if self.config is None : 
-            print( 'The config is None! ' )
+            print_color( 'The config is None! ', Fore.RED )
             exit()
         self.inputBuf = TemplateReader.load_template( self.config[Env.key_template][index] )
 
@@ -57,8 +59,9 @@ class Generator :
             tag = re.findall( res, line )[0]
             # 获取该tag的参数列表 
             paramList = self.config[Env.key_param_list][tag]
-            if paramList is None : 
-                print( 'warning : The tag param is empty!, tag name : ',tag )
+            if paramList is None or len( paramList ) == 0: 
+                print_color( 'errror : The tag param is empty!, tag name : ' + tag, Fore.RED )
+                exit()
             fullTag = '${' + tag + '}'
             # 对tag进行替换
             # 若元素不足, 则取最后一个
@@ -93,8 +96,8 @@ class Generator :
         # 遍历, 找出参数最多的tag并记录该tag的参数数量
         for tag in tag_list :
             paramList = self.config[Env.key_param_list][tag]
-            if paramList is None : 
-                print( 'warning : The tag param is empty!, tag name : ',tag )
+            if paramList is None or len( paramList ) == 0: 
+                print_color( 'warning : The tag param is empty!, tag name : ' + tag, Fore.YELLOW )
                 continue
             maxParamNum = max( maxParamNum, len( paramList ) )
         # 循环生成minParamNum行代码
@@ -105,7 +108,7 @@ class Generator :
 
     def generate(self) : 
         if self.verify() is False : 
-            print( 'error : template file num : ', len( self.config[Env.key_template] ), 'output file num : ', len( self.config[Env.key_output] ) )
+            print_color( 'error : template file num : ' + str( len( self.config[Env.key_template] ) ), 'output file num : ' + str( len( self.config[Env.key_output] ) ), Fore.RED )
             exit()
         for index in range( 0, len( self.config[Env.key_template] ) ) : 
             self.read_template( index )
@@ -133,7 +136,7 @@ class Generator :
             if len( self.outputBuf ) > Env.output_buf_size :
                 self.output()
         self.output()
-        print( "Generate to file : ",self.config[Env.key_output][index] )
+        print_color( "Generate to file : ",self.config[Env.key_output][index], Fore.GREEN )
         self.file.close()
         
 
