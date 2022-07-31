@@ -108,7 +108,7 @@ class Generator :
 
     def generate(self) : 
         if self.verify() is False : 
-            print_color( 'error : template file num : ' + str( len( self.config[Env.key_template] ) ), 'output file num : ' + str( len( self.config[Env.key_output] ) ), Fore.RED )
+            print_color( 'error : template file num : ' + str( len( self.config[Env.key_template] ) ) + 'output file num : ' + str( len( self.config[Env.key_output] ) ), Fore.RED )
             exit()
         for index in range( 0, len( self.config[Env.key_template] ) ) : 
             self.read_template( index )
@@ -136,7 +136,7 @@ class Generator :
             if len( self.outputBuf ) > Env.output_buf_size :
                 self.output()
         self.output()
-        print_color( "Generate to file : ",self.config[Env.key_output][index], Fore.GREEN )
+        print_color( "Generate to file : " + self.config[Env.key_output][index], Fore.GREEN )
         self.file.close()
         
 
