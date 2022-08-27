@@ -60,8 +60,8 @@ class Generator :
             # 获取该tag的参数列表 
             paramList = self.config[Env.key_param_list][tag]
             if paramList is None or len( paramList ) == 0: 
-                print_color( 'errror : The tag param is empty!, tag name : ' + tag, Fore.RED )
-                exit()
+                # 为空直接返回
+                return ""
             fullTag = '${' + tag + '}'
             # 对tag进行替换
             # 若元素不足, 则取最后一个
