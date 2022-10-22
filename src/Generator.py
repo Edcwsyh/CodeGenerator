@@ -8,7 +8,7 @@ import re
 import os
 import datetime
 from Tools import print_color
-from colorama import Fore
+from Tools import Color
 
 class Generator : 
     def __init__( self ) : 
@@ -41,7 +41,7 @@ class Generator :
     # @return 
     def read_template( self, index ) : 
         if self.config is None : 
-            print_color( 'The config is None! ', Fore.RED )
+            print_color( 'The config is None! ', Color.RED )
             exit()
         self.inputBuf = TemplateReader.load_template( self.config[Env.key_template][index] )
 
@@ -97,7 +97,7 @@ class Generator :
         for tag in tag_list :
             paramList = self.config[Env.key_param_list][tag]
             if paramList is None or len( paramList ) == 0: 
-                print_color( 'warning : The tag param is empty!, tag name : ' + tag, Fore.YELLOW )
+                print_color( 'warning : The tag param is empty!, tag name : ' + tag, Color.YELLOW )
                 continue
             maxParamNum = max( maxParamNum, len( paramList ) )
         # 循环生成minParamNum行代码
@@ -108,7 +108,7 @@ class Generator :
 
     def generate(self) : 
         if self.verify() is False : 
-            print_color( 'error : template file num : ' + str( len( self.config[Env.key_template] ) ) + 'output file num : ' + str( len( self.config[Env.key_output] ) ), Fore.RED )
+            print_color( 'error : template file num : ' + str( len( self.config[Env.key_template] ) ) + 'output file num : ' + str( len( self.config[Env.key_output] ) ), Color.RED )
             exit()
         for index in range( 0, len( self.config[Env.key_template] ) ) : 
             self.read_template( index )
@@ -136,7 +136,7 @@ class Generator :
             if len( self.outputBuf ) > Env.output_buf_size :
                 self.output()
         self.output()
-        print_color( "Generate to file : " + self.config[Env.key_output][index], Fore.GREEN )
+        print_color( "Generate to file : " + self.config[Env.key_output][index], Color.GREEN )
         self.file.close()
         
 
