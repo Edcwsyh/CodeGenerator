@@ -97,7 +97,6 @@ class Generator :
         for tag in tag_list :
             paramList = self.config[Env.key_param_list][tag]
             if paramList is None or len( paramList ) == 0: 
-                print_color( 'warning : The tag param is empty!, tag name : ' + tag, Color.YELLOW )
                 continue
             maxParamNum = max( maxParamNum, len( paramList ) )
         # 循环生成minParamNum行代码
